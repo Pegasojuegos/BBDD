@@ -6,6 +6,7 @@ public class Cliente {
 	private String apellido2;
 	private int telefono;
 	private String seguridadSocial;
+	private 
 	
 	public Cliente() {
 		DNI="";

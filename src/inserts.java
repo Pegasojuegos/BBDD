@@ -19,11 +19,16 @@ public class inserts {
 			//Si encuentra una coma escribe ","
 			for(int j=0;j<temp.length();j++) {
 				if(temp.charAt(j)==',') {
-					if(temp.substring(j, j+4).equals("null")) {
-						res=res.substring(0, res.length()-1);
-						res+="null,";
-						j=j+5;
-						if(!temp.substring(j, j+4).equals("null"))res+="\"";
+					if(temp.substring(j).length()>=5) {
+						if(temp.substring(j+1, j+4).equals("null")) {
+							res=res.substring(0, res.length());
+							res+=",";
+							res+="null,";
+							j=j+7;
+							if(!temp.substring(j+1, j+4).equals("null"))res+="\"";
+						}
+						res+=",";
+						j++;
 					}else res+="\",\"";
 				}else res+=temp.charAt(j);
 			}//forj
