@@ -1,10 +1,39 @@
 
 public class DatosCliente2 {
-	Cliente Grupo[];
+	private Cliente Grupo[];
+	private int contActs;
+	private String DNIsEmpleados[][]={
+			//Deportes 18
+			{"","",""},//Escalada 3
+			{"","",""},//Surf 3
+			{"","",""},//Senderismo 3
+			{"",""},//Ciclismo 2
+			{"","","",""},//Hípica 4
+			{"","",""},//Kayak 3
+			//Gastromómicas
+			{"",""},//Vinos 2
+			{"",""},//Cervezas 2
+			{"",""},//Quesos 2
+			{"","","","",""},//Mixta 5
+			{},//Picnic 0
+			{""},//Ruta 1
+			//Relajación
+			{"","","",""},//Spa 4
+			{"",""},//Meditación 2
+			{"","","",""},//Masajes 4
+			{"",""},//Baños
+			//Espectáculos
+			{"","","","",""},//Discoteca 5
+			{"","","","","",""},//Shows 6
+			{},//Cine 0
+			{"","","","","","",""}//Fiesta disfraces 7
+			};
+		
 
 	public DatosCliente2(int tamaño) {
 		this.Grupo= new Cliente [tamaño];
-	
+		int empleados=(int) (tamaño*0.44);
+		contActs=60-(int) (tamaño*0.56);
 		for (int i = 0; i < Grupo.length; i++) {
 			Grupo[i] = new Cliente();
 		}
@@ -14,7 +43,7 @@ public class DatosCliente2 {
 			boolean esta=false;
 			do {
 				esta=true;
-				int n = (int) (Math.random() * 99999998 + 1);
+				int n = (int) Math.round(Math.random() * 99999998 + 1);
 				int nlet = n % 23;
 				char nif[] = { 'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V',
 						'H', 'L', 'C', 'K', 'E' };
@@ -102,22 +131,66 @@ public class DatosCliente2 {
 			}//ifTure
 		}while(esta==false);
 	}
+	
+	//Creo la cantidad de actividades a las que se dedicará cada empleado
+	for(int i=empleados;i<Grupo.length;i++) {
+		int extra=(int)(Math.random()*4);
+		Grupo[i].setNumActs(1+extra);
+		contActs=contActs-extra;
+		
+	}//fori
+	
+	//Doy actividades a todos los empleados
+	boolean disponible;
+	int emp;
+	for(int i=0;i<DNIsEmpleados.length;i++) {
+		for(Cliente a:Grupo) {
+			a.setMismaAct(false);
+		}
+		for(int j=0;j<DNIsEmpleados[i].length;j++) {
+			disponible=false;
+			while(disponible==false) {
+				emp=(int)((Math.random()*Grupo.length-empleados)+empleados);
+				if(Grupo[emp].getNumActs()>0&&Grupo[emp].isMismaAct()==false) {
+					Grupo[emp].setMismaAct(true);
+					DNIsEmpleados[i][j]=Grupo[emp].getDNI();
+					Grupo[emp].setNumActs(Grupo[emp].getNumActs()-1);
+					disponible=true;
+				}//if
+			}//while
+		}//forj
+	}//fori
 		
 	}
 		
 	public String toString() {
+		int clientes=(int) Math.round(Grupo.length*0.44);
 		String res="";
-		for (Cliente i : Grupo) {
-			res+=String.format("insert into Clientes values(\"%s\",\"%s\",\"%s\",\"%s\",\"%d\");\n",i.getDNI(),i.getNombreCliente(),i.getApellido1(),i.getApellido2(),i.getTelefono());
+		for (int i=0;i<clientes;i++) {
+			res+=String.format("insert into Clientes values(\"%s\",\"%s\",\"%s\",\"%s\",\"%d\");\n",Grupo[i].getDNI(),Grupo[i].getNombreCliente(),Grupo[i].getApellido1(),Grupo[i].getApellido2(),Grupo[i].getTelefono());
 		}
 		return res;
 	}
 	
 	public String toString2() {
+		int empleados=(int) Math.round(Grupo.length*0.44);
 		String res="";
-		for (Cliente i : Grupo) {
-			res+=String.format("insert into Personal values(\"%s\",\"%s\",\"%s\");\n",i.getNombreCliente(),i.getDNI(),i.getSeguridadSocial());
+		for (int i=empleados;i<Grupo.length;i++) {
+			res+=String.format("insert into Personal values(\"%s\",\"%s\",\"%s\");\n",Grupo[i].getNombreCliente(),Grupo[i].getDNI(),Grupo[i].getSeguridadSocial());
 		}
+		return res;
+	}
+	
+	public String toString3() {
+		String res="";
+		String Act="";
+		int cont=0;
+		for(int i=0;i<DNIsEmpleados.length;i++) {
+			Act=TodasActividades.getAct(i);
+			for(int j=0;j<DNIsEmpleados[i].length;j++) {
+			res+=String.format("insert into Dirigido_por values(\"%s\",\"%s\");\n",DNIsEmpleados[i][j],Act);
+			}//forj
+		}//fori
 		return res;
 	}
 }

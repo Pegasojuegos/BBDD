@@ -6,17 +6,40 @@ public class Cliente {
 	private String apellido2;
 	private int telefono;
 	private String seguridadSocial;
-	private 
+	private int numActs;
+	private boolean mismaAct;
 	
+	public boolean isMismaAct() {
+		return mismaAct;
+	}
+
+
+	public void setMismaAct(boolean mismaAct) {
+		this.mismaAct = mismaAct;
+	}
+
+
 	public Cliente() {
+		numActs=0;
 		DNI="";
 		nombreCliente="";
 		apellido1="";
 		apellido2="";
 		telefono=0;
 		seguridadSocial="";
+		
 	}
 	
+
+	public int getNumActs() {
+		return numActs;
+	}
+
+
+	public void setNumActs(int numActs) {
+		this.numActs = numActs;
+	}
+
 
 	public String getSeguridadSocial() {
 		return seguridadSocial;
