@@ -2,7 +2,7 @@
 public class TodasActividades {
 	private Actividad todas[]=new Actividad[20];
 	public static final String lista[][]= {
-			{"deportes","escalada","surf","sederismo","ciclismo","hípica","kayak"},
+			{"deportes","escalada","surf","senderismo","ciclismo","hípica","kayak"},
 			{"gastronómicas","cata de vinos","cata de cervezas","cata de quesos","cata mixta","picnic","ruta gastronómica"},
 			{"relajación","spa","meditación","masajes","baños"},
 			{"espectáculos","discoteca","shows","cine","fiesta de disfraces"}};

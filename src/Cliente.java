@@ -1,4 +1,5 @@
 
+
 public class Cliente {
 	private String DNI;
 	private String nombreCliente;
@@ -8,6 +9,48 @@ public class Cliente {
 	private String seguridadSocial;
 	private int numActs;
 	private boolean mismaAct;
+	public String getNomPack() {
+		return nomPack;
+	}
+
+
+	public void setNomPack(String nomPack) {
+		this.nomPack = nomPack;
+	}
+
+
+	public int getValPack() {
+		return valPack;
+	}
+
+
+	public void setValPack(int valPack) {
+		this.valPack = valPack;
+	}
+
+
+	public String getFechCompra() {
+		return fechCompra;
+	}
+
+
+	public void setFechCompra(String fechCompra) {
+		this.fechCompra = fechCompra;
+	}
+
+
+	public String getFechViaje() {
+		return fechViaje;
+	}
+
+
+	public void setFechViaje(String fechViaje) {
+		this.fechViaje = fechViaje;
+	}
+	private String nomPack;
+	private int valPack;
+	private String fechCompra;
+	private String fechViaje;
 	
 	public boolean isMismaAct() {
 		return mismaAct;
