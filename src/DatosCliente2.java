@@ -326,11 +326,19 @@ public class DatosCliente2 {
 		if(añovar==0) {
 			mesvar=(int)((Math.random()*(12-mes))+1);
 			díavar=día(mes+mesvar,año);
-			Grupo[i].setFechViaje(String.format("%04d-%02d-%02d", año,mes+mesvar,díavar));
+			if(mes+mesvar>12) {
+			Grupo[i].setFechViaje(String.format("%04d-%02d-%02d", año,12,díavar));
+			}else {
+				Grupo[i].setFechViaje(String.format("%04d-%02d-%02d", año,mes+mesvar,díavar));
+			}
 		}else {
 			mesvar=mes();
 			díavar=día(mesvar,año+añovar);
+			if(mesvar>12) {
+				Grupo[i].setFechViaje(String.format("%04d-%02d-%02d", año+añovar,12,díavar));
+			}else {
 			Grupo[i].setFechViaje(String.format("%04d-%02d-%02d", año+añovar,mesvar,díavar));
+			}
 		}
 		
 	}//for
@@ -380,7 +388,7 @@ public class DatosCliente2 {
 	
 	public String toString2() {
 		String res="";
-		for (int i=empleados;i<Grupo.length;i++) {
+		for (int i=clientes;i<Grupo.length;i++) {
 			res+=String.format("insert into Personal values(\"%s\",\"%s\",\"%s\");\n",Grupo[i].getNombreCliente(),Grupo[i].getDNI(),Grupo[i].getSeguridadSocial());
 		}
 		return res;
