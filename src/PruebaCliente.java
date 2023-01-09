@@ -2,7 +2,7 @@
 public class PruebaCliente {
 
 	public static void main(String[] args) {
-		DatosCliente2 Clientes=new DatosCliente2(100,30);
+		DatosCliente2 Clientes=new DatosCliente2(10000,30);
 		TodasActividades acts=new TodasActividades();
 		System.out.println(Clientes);
 		System.out.println(Clientes.toString2());
